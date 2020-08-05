@@ -9,7 +9,7 @@ ap.add_argument('-e','--encodings',required=True,help="path to encodings")
 ap.add_argument('-d','--detection_model',type=str,default='hog',help="detection model- hog or cnn")
 args=vars(ap.parse_args())
 
-cap=cv2.VideoCapture(0)
+vs = VideoStream(usePiCamera=True).start()
 
 face_cascade=cv2.CascadeClassifier('D:/Atharva/python/Lib/site-packages/cv2/data/haarcascade_frontalface_default.xml')
 data = pickle.loads(open(args["encodings"], "rb").read())
@@ -18,7 +18,7 @@ data = pickle.loads(open(args["encodings"], "rb").read())
 
 while True:
 	
-	ret,image=cap.read()
+	ret,image=vs.read()
 	image = imutils.resize(image, width=500)
 
 	rgb=cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
